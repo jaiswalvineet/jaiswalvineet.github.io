@@ -1,0 +1,50 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108711212-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108711212-1');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T2F5SFF');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2F5SFF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<hr />
+<h2> Title: PowerShell | Rename the file </h2>
+<h2> Author: Vineet Jaiswal </h2>
+<h2> Date: 12 October 2017 </h2>
+<h2> Rename the file extenstion</h2>
+<p>May be used to change the file name from mobile phone recording so you can search the file based on mobile no on windows</p>
+<p>Power shell script to change naming of this format 0d20170620183415p+91xxxxxxxxx.abc to 91xxxxxxxxx-0d20170620183415p.abc</p>
+<pre><code>
+$orgPath = "C:\Users\[User]\test\"
+$delim = "+"
+$delimDot = "."
+
+Get-ChildItem $orgPath -Name | `
+foreach { 
+  Write-Output $_
+  $nameArray = $_.Split($delim)
+  if($nameArray[1] -gt 0)
+  {
+      $extArray = $nameArray[1].Split($delimDot)
+      $newName = $extArray[0]+'-'+$nameArray[0]+'.'+$extArray[1]
+        Write-Output $_
+      Rename-Item $orgPath$_ $newName
+  }
+  Write-Output $newName
+}</code></pre>
+
+</body>
